@@ -1,6 +1,7 @@
 package com.zbistapp.translator.ui.main
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -13,10 +14,12 @@ import com.zbistapp.translator.R
 import com.zbistapp.translator.data.NetworkRepoImpl
 import com.zbistapp.translator.databinding.FragmentMainBinding
 import com.zbistapp.translator.utils.ViewModelFactory
+import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val viewModelFactory = ViewModelFactory(NetworkRepoImpl(App.INSTANCE.translationApi))
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel: MainViewModel by viewModels {
         viewModelFactory
@@ -26,6 +29,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     companion object {
         fun newInstance() = MainFragment()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        App.INSTANCE.appComponent.inject(this)
     }
 
     @SuppressLint("NotifyDataSetChanged")
