@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zbistapp.translator.domain.entities.MainEntity
 import com.zbistapp.translator.domain.network.INetworkRepo
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -28,6 +30,8 @@ class MainViewModel(
             _isLoadingLiveData.value = true
             viewModelScope.launch {
                 networkRepo.fetchWords(text)
+                    .flowOn(Dispatchers.IO)
+                    .catch { _errorLiveData.value = it }
                     .collect {
                         _translationLiveData.value = it
                     }
