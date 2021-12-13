@@ -1,6 +1,6 @@
 package com.zbistapp.translator.data
 
-import com.zbistapp.translator.domain.entities.MainEntity
+import com.zbistapp.translator.data.entities.MainEntity
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,12 +1,13 @@
 package com.zbistapp.translator.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zbistapp.translator.domain.entities.MainEntity
+import com.zbistapp.translator.data.entities.MainEntity
+import com.zbistapp.translator.domain.local.ILocalRepo
 import com.zbistapp.translator.domain.network.INetworkRepo
+import com.zbistapp.translator.room.HistoryRoomEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -14,7 +15,8 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val networkRepo: INetworkRepo
+    private val networkRepo: INetworkRepo,
+    private val localRepo: ILocalRepo
 ) : ViewModel() {
 
     private val _isLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
@@ -35,6 +37,7 @@ class MainViewModel(
                     .collect {
                         _translationLiveData.value = it
                     }
+                localRepo.addToHistory(HistoryRoomEntity(text))
                 _isLoadingLiveData.postValue(false)
             }
         }

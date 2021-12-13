@@ -1,6 +1,6 @@
 package com.zbistapp.translator.domain.network
 
-import com.zbistapp.translator.domain.entities.MainEntity
+import com.zbistapp.translator.data.entities.MainEntity
 import kotlinx.coroutines.flow.Flow
 
 interface INetworkRepo {

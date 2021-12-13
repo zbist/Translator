@@ -1,10 +1,9 @@
 package com.zbistapp.translator.data
 
-import com.zbistapp.translator.domain.entities.MainEntity
+import com.zbistapp.translator.data.entities.MainEntity
 import com.zbistapp.translator.domain.network.INetworkRepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
 
 class NetworkRepoImpl(
     private val translatorApi: TranslatorApi
