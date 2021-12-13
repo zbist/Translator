@@ -22,10 +22,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         fun newInstance() = MainFragment()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
