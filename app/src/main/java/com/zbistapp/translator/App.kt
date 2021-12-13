@@ -2,6 +2,8 @@ package com.zbistapp.translator
 
 import android.app.Application
 import com.zbistapp.translator.data.TranslatorApi
+import com.zbistapp.translator.di.AppComponent
+import com.zbistapp.translator.di.DaggerAppComponent
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -9,17 +11,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class App : Application() {
 
-    private val retrofit =
-        Retrofit.Builder()
-            .baseUrl("https://dictionary.skyeng.ru/api/public/v1/")
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
-            .addConverterFactory(GsonConverterFactory.create())
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent
+            .builder()
             .build()
-
-    val translationApi = retrofit.create(TranslatorApi::class.java)
+    }
 
     companion object {
         lateinit var INSTANCE: App
+            private set
     }
 
     override fun onCreate() {
