@@ -3,12 +3,10 @@ package com.zbistapp.translator.ui.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.zbistapp.translator.R
-import com.zbistapp.translator.domain.entities.MainEntity
-import com.zbistapp.translator.domain.entities.TranslationEntity
+import com.zbistapp.translator.data.entities.MainEntity
 
 class TranslationAdapter : RecyclerView.Adapter<TranslationAdapter.TranslationHolder>() {
 

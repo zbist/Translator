@@ -2,4 +2,6 @@
     <string name="app_name">Translator</string>
     <string name="enter_word_hint">enter word</string>
     <string name="tools_text">text</string>
+    <string name="history">history</string>
+    <string name="delete">clear history</string>
 </resources>
