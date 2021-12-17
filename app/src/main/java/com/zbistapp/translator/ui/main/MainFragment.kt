@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.zbistapp.translator.R
 import com.zbistapp.translator.databinding.FragmentMainBinding
 import com.zbistapp.translator.navigation.RouterHolder
+import com.zbistapp.translator.utils.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -69,7 +70,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
 
         mainViewModel.errorLiveData.observe(viewLifecycleOwner) {
-            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+            requireContext().toast(it.message)
         }
     }
 
