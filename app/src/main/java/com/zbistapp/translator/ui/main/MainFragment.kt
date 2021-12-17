@@ -1,10 +1,8 @@
 package com.zbistapp.translator.ui.main
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.zbistapp.translator.R
