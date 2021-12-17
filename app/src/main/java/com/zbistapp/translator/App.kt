@@ -2,6 +2,7 @@ package com.zbistapp.translator
 
 import android.app.Application
 import com.zbistapp.translator.di.*
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class App : Application() {
@@ -10,7 +11,8 @@ class App : Application() {
         super.onCreate()
 
         startKoin {
-            modules(listOf(retrofitModule, networkModule, viewModelModule))
+            androidContext(this@App)
+            modules(listOf(retrofitModule, repoModule, viewModelModule, roomModule))
         }
     }
 }

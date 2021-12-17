@@ -2,13 +2,13 @@ package com.zbistapp.translator.ui.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.View
-import android.widget.Toast
+import android.view.*
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.zbistapp.translator.R
 import com.zbistapp.translator.databinding.FragmentMainBinding
+import com.zbistapp.translator.navigation.RouterHolder
+import com.zbistapp.translator.utils.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -19,6 +19,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     companion object {
         fun newInstance() = MainFragment()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        setHasOptionsMenu(true)
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -59,12 +68,27 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
 
         mainViewModel.errorLiveData.observe(viewLifecycleOwner) {
-            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+            requireContext().toast(it.message)
         }
     }
 
     private fun initRecyclerView() {
         adapter = TranslationAdapter()
         binding.translationsRecyclerView.adapter = adapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.history -> {
+                (requireActivity() as RouterHolder).mainRouter.openHistory()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
